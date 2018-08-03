@@ -332,9 +332,9 @@ class Runner(Platform):
                         else: raise Exception("Unknown load mode: " + loadMode)
 
         if self.gui:
-            cmd = "vsim -64 -do 'source %s/tcl_files/%s;'" % (self.rtlLibs, runScript)
+            cmd = "vsim -do 'source %s/tcl_files/%s;'" % (self.rtlLibs, runScript)
         else:
-            cmd = "vsim -64 -c -do 'source %s/tcl_files/%s; run -a; exit'" % (self.rtlLibs, runScript)
+            cmd = "vsim -c -do 'source %s/tcl_files/%s; run -a; exit'" % (self.rtlLibs, runScript)
 
         return cmd
 
@@ -454,7 +454,7 @@ class Runner(Platform):
         if self.gui:
             exportVarCmd = "%s export VOPT_ACC_ENA=YES;" % (exportVarCmd)
 
-        cmd = "%s %s %s vsim -64" % (exportVsimDesignModel, exportVarCmd, simArgs)
+        cmd = "%s %s %s vsim" % (exportVsimDesignModel, exportVarCmd, simArgs)
 
         # On wolfe, as only the chip is optimized and not the testbench, we need this option
         # to prevent the tb.exit_status signal from being optimized away
